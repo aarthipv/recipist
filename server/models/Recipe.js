@@ -1,35 +1,48 @@
 const mongoose = require('mongoose');
 
+// Define Recipe Schema
 const recipeSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: 'This field is required.'
+    required: 'Recipe name is required.',
+    trim: true, // Trim spaces around the name
   },
   description: {
     type: String,
-    required: 'This field is required.'
+    required: 'Description is required.',
+    trim: true, // Trim spaces around the description
   },
   email: {
     type: String,
-    required: 'This field is required.'
+    required: 'Email is required.',
+    match: [/\S+@\S+\.\S+/, 'Please enter a valid email address.'], // Basic email validation
   },
   ingredients: {
-    type: Array,
-    required: 'This field is required.'
+    type: [String], // Array of strings for ingredients
+    required: 'Ingredients are required.',
+    validate: [arrayLimit, 'You must enter at least one ingredient.'],
   },
   category: {
     type: String,
     enum: ['Thai', 'American', 'Chinese', 'Mexican', 'Indian'],
-    required: 'This field is required.'
+    required: 'Category is required.',
   },
   image: {
     type: String,
-    required: 'This field is required.'
+    required: 'Image URL is required.', // Make image required, or make it optional if necessary
   },
 });
 
-recipeSchema.index({ name: 'text', description: 'text' });
-// WildCard Indexing
-//recipeSchema.index({ "$**" : 'text' });
+// Validate that ingredients array is not empty
+function arrayLimit(val) {
+  return val && val.length > 0;
+}
 
+// Text Indexing for full-text search on name and description
+recipeSchema.index({ name: 'text', description: 'text' });
+
+// Optional wildcard index if you xneed full-text search across all fields
+// recipeSchema.index({ "$**" : 'text' });
+
+// Export the Recipe model
 module.exports = mongoose.model('Recipe', recipeSchema);

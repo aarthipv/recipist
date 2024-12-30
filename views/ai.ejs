@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        a {
+            color: inherit;  /* Inherit the color from the parent */
+            text-decoration: none;  /* Remove underline */
+        }
+    </style>
+</head>
+
+<body>
+  <div class="container py-5">
+    <h1 class="text-center mb-4">Recipe Suggestions</h1>
+
+    <!-- Form Section -->
+    <form method="POST" action="/ai" class="row g-3">
+      <div class="col-12">
+        <label for="ingredients" class="form-label">Enter Ingredients:</label>
+        <textarea 
+          name="ingredients" 
+          id="ingredients" 
+          class="form-control" 
+          rows="4" 
+          placeholder="e.g., chicken, garlic, onions"
+        ></textarea>
+      </div>
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary">Get Recipe Suggestions</button>
+      </div>
+    </form>
+
+    <!-- Recipes Section -->
+    <% if (recipe) { %>
+      <h3>Here is your recipe suggestion:</h3>
+      <div>
+          <h4><%= recipe.name %></h4> <!-- Assuming `name` is a property of the recipe -->
+          <p><%= recipe.description %></p> <!-- Assuming `description` is a property of the recipe -->
+      </div>
+  <% } else { %>
+      <p>No recipe found.</p>
+  <% } %>
+  
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
