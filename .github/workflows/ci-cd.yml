@@ -36,5 +36,5 @@ jobs:
 
       - name: Tag and Push Docker Image
         run: |
-          docker tag recipist-app docker.io/aarthipv/recipist-app:latest
-          docker push docker.io/aarthipv/recipist-app:latest
+          docker tag recipist-app docker.io/aar13/recipist-app:latest
+          docker push docker.io/aar13/recipist-app:latest
