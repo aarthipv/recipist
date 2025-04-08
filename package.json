@@ -9,8 +9,11 @@
   "main": "index.js",
   
   "scripts": {
+  
+    
   "test": "echo \"Tests passed\""
-},
+  
+  },
   
   "keywords": [],
   
@@ -54,7 +57,10 @@
   "node-fetch": "^2.7.0",
   
     
-  "openai": "^4.77.0"
+  "openai": "^4.77.0",
+  
+    
+  "prom-client": "^15.1.3"
   
   },
   
